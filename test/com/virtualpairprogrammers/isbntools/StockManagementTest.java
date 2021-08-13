@@ -25,10 +25,11 @@ Test behavior, not result:
     2, Add a database service interface, just beside the web service.
     3, Test if the database has been used if there is a data.
     4, Test if the webService has been used if no data.
+    5, Using stub so no need to override the method in myInterface.
  */
 public class StockManagementTest {
 
-    @Test
+    /*@Test
     public void testGetACorrectLocatorCode() {
         // 1, Mockup a service with what it should return:
         ExternalISBNDataService testWebService = new ExternalISBNDataService() {
@@ -51,6 +52,21 @@ public class StockManagementTest {
         stockManager.setDatabaseService(testDbService);
         // 3, Test it with the method I designed:
         String isbn = "0140177396";
+        String locatorCode = stockManager.getLocatorCode(isbn);
+        assertEquals("7396J4",  locatorCode);
+    }*/
+
+    // Using stub to mock the Object -> when().thenReturn() -> assertEquals()
+    @Test
+    public void testGetACorrectLocatorCodeUsingMockObject() {
+        ExternalISBNDataService webService = mock(ExternalISBNDataService.class);
+        ExternalISBNDataService dbService = mock(ExternalISBNDataService.class);
+        String isbn = "0140177396";
+        StockManager stockManager = new StockManager();
+        stockManager.setWebService(webService);
+        stockManager.setDatabaseService(dbService);
+        when(dbService.lookup(anyString())).thenReturn(null);
+        when(webService.lookup(anyString())).thenReturn(new ABook(isbn, "John Steinbeck", "Of Mice and Men"));
         String locatorCode = stockManager.getLocatorCode(isbn);
         assertEquals("7396J4",  locatorCode);
     }
