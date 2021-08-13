@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
     4，最后一个数字可以是字母X。
     5，如果最后是X，如何进入逻辑进行最后的计算？ASCII 计算法：X == 10。
     6，有13位数字的也成立？找到逻辑，加入到原有的代码中，让这两种逻辑同时实现，if else
+    7，Refactor -> Extract method -> Introduce constant
 
  */
 public class ValidateISBNTest {
