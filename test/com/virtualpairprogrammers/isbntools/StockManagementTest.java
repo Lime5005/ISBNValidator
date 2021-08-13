@@ -31,6 +31,12 @@ Refactor again:
     JUnit Setup() and TearDown() == Constructor and deConstructor
     1, Declare as class lever variables.
     2, Initiate in setup() with @BeforeEach, so each test can still run individually.
+Avoid Tautology:
+    Tautology means using the same logic in the test as in the implementation.
+    1, See example: NumberValidator.java
+    2, A test should not involve any logic, it has nothing to calculate.
+    3, Since the test is to check "is or not" logic, divide into 2 tests.
+    4, One for check "is", the other for check "not".
 
  */
 public class StockManagementTest {
